@@ -11,9 +11,17 @@ const navLinks = [
     { name: "Contacto", href: "#contacto" },
 ];
 
+import { createPortal } from "react-dom";
+
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     const { scrollY } = useScroll();
 
     useMotionValueEvent(scrollY, "change", (latest) => {
@@ -95,35 +103,38 @@ export default function Header() {
                 </div>
             </div>
 
-            {/* Mobile Menu Overlay */}
-            <AnimatePresence>
-                {isMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-black/95 backdrop-blur-xl z-[60] flex flex-col items-center justify-center space-y-8 md:hidden"
-                    >
-                        <button
-                            onClick={() => setIsMenuOpen(false)}
-                            className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors"
+            {/* Mobile Menu Overlay - Portaled to body to avoid stacking context issues */}
+            {mounted && createPortal(
+                <AnimatePresence>
+                    {isMenuOpen && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 bg-black/95 backdrop-blur-xl z-[9999] flex flex-col items-center justify-center space-y-8 md:hidden"
                         >
-                            <span className="material-symbols-outlined text-3xl">close</span>
-                        </button>
-
-                        {navLinks.map((link) => (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                onClick={(e) => scrollToSection(e, link.href)}
-                                className="text-3xl font-black uppercase tracking-widest text-white hover:text-primary transition-colors hover:scale-105 transform duration-200"
+                            <button
+                                onClick={() => setIsMenuOpen(false)}
+                                className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors"
                             >
-                                {link.name}
-                            </a>
-                        ))}
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                                <span className="material-symbols-outlined text-4xl">close</span>
+                            </button>
+
+                            {navLinks.map((link) => (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={(e) => scrollToSection(e, link.href)}
+                                    className="text-4xl font-black uppercase tracking-widest text-white hover:text-primary transition-colors hover:scale-105 transform duration-200"
+                                >
+                                    {link.name}
+                                </a>
+                            ))}
+                        </motion.div>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
         </motion.nav>
     );
 }
