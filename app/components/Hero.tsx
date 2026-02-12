@@ -74,15 +74,15 @@ export default function Hero() {
                 </div>
 
                 <div className="flex-1 flex items-center relative z-10">
-                    <div className="overflow-hidden">
+                    <div className="overflow-visible pb-4">
                         <motion.h1
-                            className="text-[clamp(2.5rem,10.5vw,9rem)] leading-[0.85] font-extrabold text-white tracking-tighter select-none"
+                            className="text-[clamp(2.5rem,10.5vw,9rem)] leading-[0.85] font-extrabold text-white tracking-tighter select-none py-2"
                             style={{ y: y1 }}
                             initial={{ y: "100%" }}
                             animate={{ y: 0 }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
                         >
-                            impacto de marca<span className="text-[0.4em] align-top font-normal -ml-2">®</span>
+                            impacto de marca<span className="text-[0.4em] align-top font-normal -ml-2 relative -top-2">®</span>
                         </motion.h1>
                     </div>
                 </div>

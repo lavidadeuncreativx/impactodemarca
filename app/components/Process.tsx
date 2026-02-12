@@ -8,7 +8,7 @@ const steps = [
         title: "Idea",
         icon: "chat",
         description: "Nos cuentas tu idea + la cantidad de piezas + fecha, vía WhatsApp.",
-        tag: "WhatsApp brief",
+        tag: "Contactar",
         image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD7Au4iEBxlLwjRjqC32YpsVfq9izAzwZTJktN0K6J8SvnC4VTT9Rk60-6hKen7xReAmDa-VNSBZYrGeGJdsbA4dfHIJjGVHuYVLGgQTRM33Roj9Iz-Jx2iFSoXr0mWCqxDdTnDP0lkxT34qdCSOk48dN8wiyBqde7Gk9SrWuNpLQbvAktHtqPGzZRUEQdnKyepjnSchc8-PL8V96Od4aW8rAEKo-lyqaIVLh0P5vxi3tXU5Ek5M7GrvxdWVMcoprpltDEWCQEgbRU1"
     },
     {
@@ -16,7 +16,7 @@ const steps = [
         title: "Propuesta",
         icon: "view_in_ar",
         description: "Visualizamos tu marca con mockups realistas y opciones que se ajustan a tu presupuesto.",
-        tag: "Realistic mockups",
+        tag: "Previsualiza el resultado",
         image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD7Au4iEBxlLwjRjqC32YpsVfq9izAzwZTJktN0K6J8SvnC4VTT9Rk60-6hKen7xReAmDa-VNSBZYrGeGJdsbA4dfHIJjGVHuYVLGgQTRM33Roj9Iz-Jx2iFSoXr0mWCqxDdTnDP0lkxT34qdCSOk48dN8wiyBqde7Gk9SrWuNpLQbvAktHtqPGzZRUEQdnKyepjnSchc8-PL8V96Od4aW8rAEKo-lyqaIVLh0P5vxi3tXU5Ek5M7GrvxdWVMcoprpltDEWCQEgbRU1"
     },
     {
@@ -24,7 +24,7 @@ const steps = [
         title: "Entrega",
         icon: "rocket_launch",
         description: "Producción acelerada y logística express directo a tus manos. Sin complicaciones.",
-        tag: "Express logistics",
+        tag: "Satisfacción garantizada",
         image: null
     }
 ];
