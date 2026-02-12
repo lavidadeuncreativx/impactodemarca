@@ -99,17 +99,24 @@ export default function Header() {
             <AnimatePresence>
                 {isMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="fixed inset-0 bg-background-dark z-40 flex flex-col items-center justify-center space-y-8 md:hidden"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black/95 backdrop-blur-xl z-[60] flex flex-col items-center justify-center space-y-8 md:hidden"
                     >
+                        <button
+                            onClick={() => setIsMenuOpen(false)}
+                            className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors"
+                        >
+                            <span className="material-symbols-outlined text-3xl">close</span>
+                        </button>
+
                         {navLinks.map((link) => (
                             <a
                                 key={link.name}
                                 href={link.href}
                                 onClick={(e) => scrollToSection(e, link.href)}
-                                className="text-2xl font-bold uppercase tracking-widest text-white hover:text-primary transition-colors"
+                                className="text-3xl font-black uppercase tracking-widest text-white hover:text-primary transition-colors hover:scale-105 transform duration-200"
                             >
                                 {link.name}
                             </a>
