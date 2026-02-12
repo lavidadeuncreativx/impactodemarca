@@ -8,12 +8,14 @@ export default function Hero() {
     const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
     useEffect(() => {
-        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-        setPrefersReducedMotion(mediaQuery.matches);
+        if (typeof window !== "undefined" && window.matchMedia) {
+            const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+            setPrefersReducedMotion(mediaQuery.matches);
 
-        const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-        mediaQuery.addEventListener("change", handler);
-        return () => mediaQuery.removeEventListener("change", handler);
+            const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+            mediaQuery.addEventListener("change", handler);
+            return () => mediaQuery.removeEventListener("change", handler);
+        }
     }, []);
 
     const { scrollY } = useScroll();
