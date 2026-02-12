@@ -1,32 +1,43 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const reviews = [
+const initialReviews = [
     {
         id: 1,
         author: "Carlos Méndez",
         role: "Director de Marketing",
         rating: 5,
-        text: "La atención en WhatsApp fue inmediata. Necesitaba 50 mochilas bordadas para una convención en 3 días y cumplieron perfecto. La calidad es otro nivel."
+        text: "Neta me salvaron la vida. Tenía el evento encima y nadie me resolvía lo de las mochilas. Me contestaron rápido en Whats y en 3 días ya las tenía todas perfectas. 🔥"
     },
     {
         id: 2,
         author: "Ana Sofía Ruiz",
         role: "Gerente de RH",
         rating: 5,
-        text: "Los kits de bienvenida quedaron increíbles. Me encantó que pudiera ver un mockup antes de pagar nada. Definitivamente seguiremos trabajando con Impacto."
+        text: "Amé los kits!! 😍 Lo mejor fue que me mandaron el previo de cómo se vería antes de pagar, así no hubo fallas. Súper recomendados."
     },
     {
         id: 3,
         author: "Eduardo Vargas",
         role: "Event Planner",
         rating: 5,
-        text: "El stand que diseñaron para nuestra expo se robó todas las miradas. No solo se veía premium, sino que resistió perfecto los 3 días de uso rudo."
+        text: "El stand fue un hit en la expo, literal todo mundo se paraba a ver. Se veía súper pro y aguantó perfecto el uso rudo. 10/10 👌"
     }
 ];
 
 export default function Testimonials() {
+    const [reviews, setReviews] = useState(initialReviews);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [newReview, setNewReview] = useState({ author: "", role: "", text: "", rating: 5 });
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        setReviews([{ ...newReview, id: Date.now() }, ...reviews]);
+        setIsModalOpen(false);
+        setNewReview({ author: "", role: "", text: "", rating: 5 });
+    };
     return (
         <section id="resenas" className="py-24 bg-neutral-900 border-y border-white/5 relative overflow-hidden">
             {/* Background Texture */}
@@ -48,9 +59,15 @@ export default function Testimonials() {
                         </h2>
                     </motion.div>
 
-                    <div className="flex gap-2">
-                        <div className="text-yellow-400 flex text-2xl">★★★★★</div>
-                        <span className="text-white font-bold text-lg">4.9/5 Promedio</span>
+                    <div className="flex flex-col md:items-end gap-2">
+                        <div className="text-yellow-400 flex text-3xl">★★★★★</div>
+                        <span className="text-white font-black text-3xl tracking-tight">4.9/5 Promedio</span>
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="text-primary text-sm font-bold uppercase tracking-widest hover:underline underline-offset-4 mt-2"
+                        >
+                            Califica nuestro trabajo
+                        </button>
                     </div>
                 </div>
 
@@ -64,7 +81,6 @@ export default function Testimonials() {
                             transition={{ delay: i * 0.15, duration: 0.6 }}
                             className="bg-neutral-800/50 backdrop-blur-sm border border-white/5 p-8 rounded-3xl relative group hover:bg-neutral-800 transition-colors"
                         >
-                            <div className="text-primary text-6xl font-serif absolute top-4 left-6 opacity-20">"</div>
 
                             <div className="relative z-10">
                                 <div className="flex text-yellow-500 mb-6 text-sm gap-1">
@@ -91,6 +107,76 @@ export default function Testimonials() {
                     ))}
                 </div>
             </div>
+
+            {/* Review Modal */}
+            <AnimatePresence>
+                {isModalOpen && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/80 backdrop-blur-sm"
+                        onClick={() => setIsModalOpen(false)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            onClick={(e) => e.stopPropagation()}
+                            className="bg-neutral-900 w-full max-w-md p-8 rounded-3xl border border-white/10 relative shadow-2xl"
+                        >
+                            <button
+                                onClick={() => setIsModalOpen(false)}
+                                className="absolute top-4 right-4 text-white/50 hover:text-white"
+                            >
+                                <span className="material-symbols-outlined">close</span>
+                            </button>
+
+                            <h3 className="text-2xl font-black text-white mb-6">Comparte tu experiencia</h3>
+
+                            <form onSubmit={handleSubmit} className="space-y-4">
+                                <div>
+                                    <label className="block text-xs font-bold uppercase tracking-widest text-neutral-500 mb-2">Nombre</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        className="w-full bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors"
+                                        value={newReview.author}
+                                        onChange={(e) => setNewReview({ ...newReview, author: e.target.value })}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-bold uppercase tracking-widest text-neutral-500 mb-2">Rol / Puesto</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        className="w-full bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors"
+                                        value={newReview.role}
+                                        onChange={(e) => setNewReview({ ...newReview, role: e.target.value })}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-bold uppercase tracking-widest text-neutral-500 mb-2">Reseña</label>
+                                    <textarea
+                                        required
+                                        rows={4}
+                                        className="w-full bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors resize-none"
+                                        value={newReview.text}
+                                        onChange={(e) => setNewReview({ ...newReview, text: e.target.value })}
+                                    />
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    className="w-full bg-primary hover:bg-teal-600 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95"
+                                >
+                                    Publicar reseña
+                                </button>
+                            </form>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }
