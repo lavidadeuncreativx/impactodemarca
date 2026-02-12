@@ -1,26 +1,79 @@
 @import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #0D9488;
+  --color-background-light: #F8F8F8;
+  --color-background-dark: #0A0A0A;
+  --color-panel-gray: #1A1A1A;
+
+  --font-display: var(--font-inter);
+
+  --radius-xl: 2rem;
+  --radius-2xl: 2.5rem;
+  --radius-3xl: 3rem;
+
+  --ease-premium-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-premium-inout: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Custom utilities */
+.grainy-texture {
+  position: relative;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.grainy-texture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCcXfTRTsbHJTEo-Lf8cG4_B69JanK6e3MMnI7_Y5WNIB6FaLQ7x2GhROkCbNI9wwMVbq8jAE19L7CP-FtMq6crbGaUx185tGvbqzS8pLZLM4BorXh2ElA_L-hTO4W3Af2czXBG6j4KScnlay7UOREBFXkc-OeArOQfvjN6NRjNH5VrXbDeiTaycKr3OrN-6jkpcHp40yw3ExZI1tCcqi2fMDqtKe75saa6SdbVadA4SAU0LV10sTMM9S6trsakUwIYoUaQ8K3iR0yg");
+  z-index: 10;
+  border-radius: inherit;
+}
+
+.glass-card {
+  @apply backdrop-blur-md bg-white/10 border border-white/20;
+}
+
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Material Symbols */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-background-dark text-white font-display antialiased transition-colors duration-300;
 }
