@@ -74,7 +74,7 @@ export default function Hero() {
                 <div className="flex-1 flex items-center relative z-10">
                     <div className="overflow-hidden">
                         <motion.h1
-                            className="text-[clamp(3rem,12vw,10rem)] leading-[0.85] font-extrabold text-white tracking-tighter select-none"
+                            className="text-[clamp(2.5rem,10.5vw,9rem)] leading-[0.85] font-extrabold text-white tracking-tighter select-none"
                             style={{ y: y1 }}
                             initial={{ y: "100%" }}
                             animate={{ y: 0 }}
