@@ -117,7 +117,7 @@ export default function Hero() {
                             transition={{ duration: 0.4, delay: 0.8 }}
                         >
                             <a
-                                href="https://wa.me/34623965999"
+                                href="https://wa.me/525561491602?text=Hola,%20vengo%20de%20la%20página%20web%20y%20quiero%20solicitar%20información"
                                 className="inline-flex items-center bg-primary hover:bg-teal-700 text-white px-10 py-5 rounded-full font-bold transition-all transform hover:scale-[1.02] active:scale-95 shadow-2xl shadow-primary/20 group"
                                 data-event="click_whatsapp"
                             >

@@ -7,7 +7,7 @@ const steps = [
         id: "01",
         title: "Idea",
         icon: "chat",
-        description: "Nos envías tu idea + cantidad + fecha vía WhatsApp. Brief inmediato sin fricciones.",
+        description: "Nos cuentas tu idea + la cantidad de piezas + fecha, vía WhatsApp.",
         tag: "WhatsApp brief",
         image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD7Au4iEBxlLwjRjqC32YpsVfq9izAzwZTJktN0K6J8SvnC4VTT9Rk60-6hKen7xReAmDa-VNSBZYrGeGJdsbA4dfHIJjGVHuYVLGgQTRM33Roj9Iz-Jx2iFSoXr0mWCqxDdTnDP0lkxT34qdCSOk48dN8wiyBqde7Gk9SrWuNpLQbvAktHtqPGzZRUEQdnKyepjnSchc8-PL8V96Od4aW8rAEKo-lyqaIVLh0P5vxi3tXU5Ek5M7GrvxdWVMcoprpltDEWCQEgbRU1"
     },
@@ -84,14 +84,6 @@ export default function Process() {
                                 </div>
                             </div>
 
-                            {/* Decorative Floating Elements on Hover (Desktop Only) */}
-                            {step.image && (
-                                <div className="absolute -top-12 -right-8 w-32 h-32 z-20 hidden md:block opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 delay-100 pointer-events-none">
-                                    <div className="bg-white p-2 rounded-2xl shadow-2xl rotate-12 border border-neutral-700">
-                                        <img src={step.image} alt="Preview" className="w-full h-full object-cover rounded-xl" />
-                                    </div>
-                                </div>
-                            )}
                         </motion.div>
                     ))}
                 </div>
@@ -105,14 +97,18 @@ export default function Process() {
                 >
                     <p className="text-neutral-500 text-lg mb-8">¿Listo para elevar la presencia de tu marca?</p>
                     <a
-                        href="#"
+                        href="#contacto"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
+                        }}
                         className="inline-flex items-center gap-4 bg-primary hover:bg-teal-600 text-white px-10 py-5 rounded-full text-lg font-black transition-all group shadow-2xl shadow-primary/30 active:scale-95"
                     >
-                        Iniciar un proyecto por WhatsApp
+                        Cotizar proyecto
                         <span className="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
                     </a>
                 </motion.div>
-            </div>
-        </section>
+            </div >
+        </section >
     );
 }

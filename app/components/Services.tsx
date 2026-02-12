@@ -9,7 +9,7 @@ const services = [
         id: 1,
         title: "Promocionales",
         description: "Regalos de marca que generan conexión. Contamos con un catálogo extenso que incluye termos, libretas, tecnología y artículos premium personalizados para tus campañas de fidelización.",
-        image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD7Au4iEBxlLwjRjqC32YpsVfq9izAzwZTJktN0K6J8SvnC4VTT9Rk60-6hKen7xReAmDa-VNSBZYrGeGJdsbA4dfHIJjGVHuYVLGgQTRM33Roj9Iz-Jx2iFSoXr0mWCqxDdTnDP0lkxT34qdCSOk48dN8wiyBqde7Gk9SrWuNpLQbvAktHtqPGzZRUEQdnKyepjnSchc8-PL8V96Od4aW8rAEKo-lyqaIVLh0P5vxi3tXU5Ek5M7GrvxdWVMcoprpltDEWCQEgbRU1",
+        image: null,
         cta: "Cotizar Promocionales"
     },
     {

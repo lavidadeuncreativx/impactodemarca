@@ -48,7 +48,7 @@ export default function Contact() {
                             <div className="space-y-8">
                                 <div>
                                     <a
-                                        href="https://wa.me/34623965999"
+                                        href="https://wa.me/525561491602?text=Hola,%20vengo%20de%20la%20página%20web%20y%20quiero%20solicitar%20información"
                                         className="inline-flex items-center gap-4 bg-primary hover:bg-teal-600 text-white px-8 py-5 rounded-3xl text-2xl font-black hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-primary/20 group"
                                         data-event="click_whatsapp"
                                     >
@@ -63,7 +63,7 @@ export default function Contact() {
 
                                 <div className="flex flex-wrap gap-12 text-slate-400 pt-4 border-t border-slate-800">
                                     <div className="flex flex-col gap-1">
-                                        <span className="text-[10px] uppercase tracking-widest font-black text-slate-500">RESUMEN HARD INSIGHTS</span>
+                                        <span className="text-[10px] uppercase tracking-widest font-black text-slate-500">Horario de atención (Hora CDMX)</span>
                                         <span className="text-white font-bold text-lg">09:00 – 19:00 HRS</span>
                                     </div>
                                 </div>

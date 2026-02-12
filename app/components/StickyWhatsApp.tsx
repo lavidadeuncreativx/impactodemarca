@@ -47,7 +47,7 @@ export default function StickyWhatsApp() {
                     transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 >
                     <a
-                        href="https://wa.me/34623965999"
+                        href="https://wa.me/525561491602?text=Hola,%20vengo%20de%20la%20página%20web%20y%20quiero%20solicitar%20información"
                         className="flex items-center justify-center gap-3 bg-primary text-white font-bold py-4 rounded-full shadow-2xl shadow-primary/30 pointer-events-auto"
                         data-event="click_whatsapp"
                     >

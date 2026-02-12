@@ -50,7 +50,7 @@ export default function FAQ() {
                     <div className="p-8 bg-slate-800/50 rounded-3xl border border-slate-800 backdrop-blur-sm">
                         <p className="text-primary font-black tracking-[0.2em] text-[10px] uppercase mb-4">HARD INSIGHTS</p>
                         <p className="font-bold text-2xl mb-4 leading-tight text-white">Procesos optimizados para resultados de alto nivel.</p>
-                        <a href="mailto:proyectos@impacto.studio" className="text-primary font-bold text-xl hover:underline underline-offset-4 decoration-2">Contáctanos directamente →</a>
+                        <a href="mailto:info@impactodemarca.com.mx" className="text-primary font-bold text-xl hover:underline underline-offset-4 decoration-2">Contáctanos directamente →</a>
                     </div>
                 </motion.div>
 
