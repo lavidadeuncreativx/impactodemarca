@@ -34,6 +34,14 @@ export default function Hero() {
         mouseY.set(clientY - top);
     }
 
+    const spotlightBackground = useMotionTemplate`
+        radial-gradient(
+          650px circle at ${mouseX}px ${mouseY}px,
+          rgba(255,255,255,0.06),
+          transparent 80%
+        )
+    `;
+
     return (
         <section className="pt-24 px-4 md:px-6">
             <motion.div
@@ -47,15 +55,7 @@ export default function Hero() {
                 {!prefersReducedMotion && (
                     <motion.div
                         className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 hidden md:block"
-                        style={{
-                            background: useMotionTemplate`
-                radial-gradient(
-                  650px circle at ${mouseX}px ${mouseY}px,
-                  rgba(255,255,255,0.06),
-                  transparent 80%
-                )
-              `,
-                        }}
+                        style={{ background: spotlightBackground }}
                     />
                 )}
 

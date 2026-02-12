@@ -61,7 +61,7 @@ export default function Testimonials() {
 
                     <div className="flex flex-col md:items-end gap-2">
                         <div className="text-yellow-400 flex text-3xl">★★★★★</div>
-                        <span className="text-white font-black text-3xl tracking-tight">4.9/5 Promedio</span>
+                        <span className="text-white font-black text-4xl md:text-5xl tracking-tight">4.9/5 Promedio</span>
                         <button
                             onClick={() => setIsModalOpen(true)}
                             className="text-primary text-sm font-bold uppercase tracking-widest hover:underline underline-offset-4 mt-2"
