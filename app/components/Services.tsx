@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import clsx from "clsx";
 
 const services = [
@@ -86,90 +86,95 @@ export default function Services() {
                 </div>
 
                 <div className="relative z-10 space-y-0 divide-y divide-white/10">
-                    {services.map((service, i) => (
-                        <motion.div
-                            key={service.id}
-                            className="group py-8 md:py-10"
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                        >
-                            <button
-                                className="w-full flex items-center justify-between text-left focus:outline-none group"
-                                onClick={() => toggle(service.id)}
+                    <LayoutGroup>
+                        {services.map((service, i) => (
+                            <motion.div
+                                key={service.id}
+                                className="group py-8 md:py-10"
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.1 }}
+                                layout="position"
                             >
-                                <div className="flex items-center gap-6 md:gap-12">
-                                    <span className="text-white/30 text-sm font-mono tracking-widest">{`0${service.id}`}</span>
-                                    <h3 className={clsx(
-                                        "text-2xl md:text-4xl font-medium transition-colors duration-300",
-                                        openId === service.id ? "text-primary" : "text-white group-hover:text-primary"
-                                    )}>
-                                        {service.title}
-                                    </h3>
-                                </div>
-                                <motion.span
-                                    className={clsx(
-                                        "material-symbols-outlined text-3xl transition-colors duration-300",
-                                        openId === service.id ? "text-primary" : "text-white group-hover:text-primary"
-                                    )}
-                                    animate={{ rotate: openId === service.id ? 45 : 0 }}
+                                <button
+                                    className="w-full flex items-center justify-between text-left focus:outline-none group"
+                                    onClick={() => toggle(service.id)}
                                 >
-                                    add
-                                </motion.span>
-                            </button>
-
-                            <AnimatePresence>
-                                {openId === service.id && (
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: "auto", opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                                        className="overflow-hidden"
+                                    <div className="flex items-center gap-6 md:gap-12">
+                                        <span className="text-white/30 text-sm font-mono tracking-widest">{`0${service.id}`}</span>
+                                        <h3 className={clsx(
+                                            "text-2xl md:text-4xl font-medium transition-colors duration-300",
+                                            openId === service.id ? "text-primary" : "text-white group-hover:text-primary"
+                                        )}>
+                                            {service.title}
+                                        </h3>
+                                    </div>
+                                    <motion.span
+                                        className={clsx(
+                                            "material-symbols-outlined text-3xl transition-colors duration-300",
+                                            openId === service.id ? "text-primary" : "text-white group-hover:text-primary"
+                                        )}
+                                        animate={{ rotate: openId === service.id ? 45 : 0 }}
                                     >
-                                        <div className="pt-8 pl-14 md:pl-24 max-w-4xl">
-                                            <div className="grid md:grid-cols-2 gap-8 items-center pb-4">
-                                                <div>
-                                                    <motion.p
-                                                        className="text-white/60 text-lg leading-relaxed mb-6"
-                                                        initial={{ opacity: 0, y: 10 }}
-                                                        animate={{ opacity: 1, y: 0 }}
-                                                        transition={{ delay: 0.1 }}
-                                                    >
-                                                        {service.description}
-                                                    </motion.p>
-                                                    <motion.button
-                                                        className="bg-primary hover:bg-teal-600 text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg shadow-primary/20"
-                                                        initial={{ opacity: 0, x: -10 }}
-                                                        animate={{ opacity: 1, x: 0 }}
-                                                        transition={{ delay: 0.2 }}
-                                                        data-event="click_service_card"
-                                                    >
-                                                        {service.cta}
-                                                    </motion.button>
+                                        add
+                                    </motion.span>
+                                </button>
+
+                                <AnimatePresence initial={false}>
+                                    {openId === service.id && (
+                                        <motion.div
+                                            key="content"
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                            className="overflow-hidden"
+                                            style={{ willChange: "height" }}
+                                        >
+                                            <div className="pt-8 pl-14 md:pl-24 max-w-4xl">
+                                                <div className="grid md:grid-cols-2 gap-8 items-center pb-4">
+                                                    <div>
+                                                        <motion.p
+                                                            className="text-white/60 text-lg leading-relaxed mb-6"
+                                                            initial={{ opacity: 0, y: 10 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            transition={{ delay: 0.1 }}
+                                                        >
+                                                            {service.description}
+                                                        </motion.p>
+                                                        <motion.button
+                                                            className="bg-primary hover:bg-teal-600 text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg shadow-primary/20"
+                                                            initial={{ opacity: 0, x: -10 }}
+                                                            animate={{ opacity: 1, x: 0 }}
+                                                            transition={{ delay: 0.2 }}
+                                                            data-event="click_service_card"
+                                                        >
+                                                            {service.cta}
+                                                        </motion.button>
+                                                    </div>
+                                                    {service.image && (
+                                                        <motion.div
+                                                            className="relative hidden md:block"
+                                                            initial={{ opacity: 0, scale: 0.9 }}
+                                                            animate={{ opacity: 1, scale: 1 }}
+                                                            transition={{ delay: 0.2 }}
+                                                        >
+                                                            <img
+                                                                src={service.image}
+                                                                alt={service.title}
+                                                                className="rounded-2xl w-full h-56 object-cover border border-white/10"
+                                                            />
+                                                        </motion.div>
+                                                    )}
                                                 </div>
-                                                {service.image && (
-                                                    <motion.div
-                                                        className="relative hidden md:block"
-                                                        initial={{ opacity: 0, scale: 0.9 }}
-                                                        animate={{ opacity: 1, scale: 1 }}
-                                                        transition={{ delay: 0.2 }}
-                                                    >
-                                                        <img
-                                                            src={service.image}
-                                                            alt={service.title}
-                                                            className="rounded-2xl w-full h-56 object-cover border border-white/10"
-                                                        />
-                                                    </motion.div>
-                                                )}
                                             </div>
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-                        </motion.div>
-                    ))}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </motion.div>
+                        ))}
+                    </LayoutGroup>
                 </div>
 
                 {/* Glow effect */}
