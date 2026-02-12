@@ -114,7 +114,7 @@ export default function Portfolio() {
                             animate={{ scale: 1, opacity: 1, y: 0 }}
                             exit={{ scale: 0.9, opacity: 0, y: 20 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="bg-neutral-900 w-full max-w-5xl rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 relative"
+                            className="bg-neutral-900 w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[2rem] shadow-2xl border border-white/10 relative no-scrollbar"
                         >
                             <button
                                 onClick={() => setSelectedItem(null)}

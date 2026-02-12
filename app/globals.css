@@ -75,5 +75,5 @@
 }
 
 body {
-  @apply bg-background-dark text-white font-display antialiased transition-colors duration-300;
+  @apply bg-background-light dark:bg-background-dark text-neutral-900 dark:text-white font-display antialiased transition-colors duration-300;
 }

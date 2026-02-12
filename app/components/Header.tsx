@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 
 const navLinks = [
@@ -12,30 +12,22 @@ const navLinks = [
 ];
 
 export default function Header() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const { scrollY } = useScroll();
 
     useMotionValueEvent(scrollY, "change", (latest) => {
-        if (latest > 50) {
-            setIsScrolled(true);
-        } else {
-            setIsScrolled(false);
-        }
+        setIsScrolled(latest > 50);
     });
+
+    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
     const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
+        setIsMenuOpen(false);
+
         const target = document.querySelector(href);
         if (target) {
-            // Lenis handles smooth scroll automatically if configured to intercept standard anchors,
-            // but we can also use window.scrollTo with behavior smooth if simple.
-            // Since we use global Lenis, we can trigger it or just use native scrollIntoView
-            // and Lenis will smooth it if we use its instance.
-            // For now, let's try standard anchor click which Lenis often catches if configured.
-            // Or we can use `lenis.scrollTo(target)`.
-            // Since we don't have direct access to lenis instance here without context,
-            // we'll use a custom event or just standard behavior since Lenis usually polyfills html scroll.
-
             target.scrollIntoView({ behavior: 'smooth' });
         }
     };
@@ -47,15 +39,16 @@ export default function Header() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className={clsx(
                 "fixed top-0 w-full z-50 px-6 md:px-8 py-6 flex justify-between items-center transition-all duration-300",
-                isScrolled
-                    ? "bg-background-dark/70 backdrop-blur-md shadow-lg border-b border-white/5 py-4"
+                isScrolled || isMenuOpen
+                    ? "bg-background-dark/90 backdrop-blur-md shadow-lg border-b border-white/5 py-4"
                     : "bg-transparent py-6"
             )}
         >
-            <div className="flex items-center space-x-2 mix-blend-difference text-white">
+            <div className="flex items-center space-x-2 mix-blend-difference text-white relative z-50">
                 <span className="font-extrabold text-xl tracking-tighter">impacto de marca®</span>
             </div>
 
+            {/* Desktop Menu */}
             <div className="hidden md:flex space-x-8 text-[10px] font-bold uppercase tracking-[0.2em] text-white/90">
                 {navLinks.map((link) => (
                     <a
@@ -69,7 +62,7 @@ export default function Header() {
                 ))}
             </div>
 
-            <div className="flex items-center gap-4 text-white">
+            <div className="flex items-center gap-4 text-white relative z-50">
                 <button
                     className="p-2 rounded-full hover:bg-white/10 transition-colors"
                     onClick={() => document.documentElement.classList.toggle('dark')}
@@ -78,11 +71,52 @@ export default function Header() {
                     <span className="material-symbols-outlined text-lg">contrast</span>
                 </button>
 
-                <div className="flex flex-col space-y-1.5 cursor-pointer group">
+                <div
+                    className="flex flex-col space-y-1.5 cursor-pointer group md:hidden"
+                    onClick={toggleMenu}
+                >
+                    <motion.div
+                        animate={isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+                        className="w-8 h-0.5 bg-white transition-transform"
+                    ></motion.div>
+                    <motion.div
+                        animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                        className="w-8 h-0.5 bg-white transition-opacity"
+                    ></motion.div>
+                    <motion.div
+                        animate={isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+                        className="w-8 h-0.5 bg-white transition-transform"
+                    ></motion.div>
+                </div>
+
+                <div className="hidden md:flex flex-col space-y-1.5 cursor-pointer group">
                     <div className="w-8 h-0.5 bg-white transition-all group-hover:w-5 ml-auto"></div>
                     <div className="w-8 h-0.5 bg-white"></div>
                 </div>
             </div>
+
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {isMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="fixed inset-0 bg-background-dark z-40 flex flex-col items-center justify-center space-y-8 md:hidden"
+                    >
+                        {navLinks.map((link) => (
+                            <a
+                                key={link.name}
+                                href={link.href}
+                                onClick={(e) => scrollToSection(e, link.href)}
+                                className="text-2xl font-bold uppercase tracking-widest text-white hover:text-primary transition-colors"
+                            >
+                                {link.name}
+                            </a>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </motion.nav>
     );
 }
