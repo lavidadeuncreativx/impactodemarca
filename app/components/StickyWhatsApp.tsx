@@ -17,22 +17,29 @@ export default function StickyWhatsApp() {
             }
         };
 
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                setInContactSection(entry.isIntersecting);
-            },
-            { threshold: 0.1 }
-        );
-
         const contactSection = document.getElementById("contacto");
-        if (contactSection) {
-            observer.observe(contactSection);
+
+        // Scroll listener
+        window.addEventListener("scroll", handleScroll);
+
+        // Intersection Observer for contact section (optional)
+        let observer: IntersectionObserver | null = null;
+        if ("IntersectionObserver" in window) {
+            observer = new IntersectionObserver(
+                ([entry]) => {
+                    setInContactSection(entry.isIntersecting);
+                },
+                { threshold: 0.1 }
+            );
+
+            if (contactSection) {
+                observer.observe(contactSection);
+            }
         }
 
-        window.addEventListener("scroll", handleScroll);
         return () => {
             window.removeEventListener("scroll", handleScroll);
-            if (contactSection) observer.unobserve(contactSection);
+            if (observer && contactSection) observer.unobserve(contactSection);
         };
     }, []);
 

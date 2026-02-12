@@ -108,7 +108,7 @@ export default function Process() {
                         <span className="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
                     </a>
                 </motion.div>
-            </div >
-        </section >
+            </div>
+        </section>
     );
 }
